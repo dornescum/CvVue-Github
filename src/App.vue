@@ -5,18 +5,20 @@
 
 
     <router-view/>
+    <TheFooter></TheFooter>
   </div>
 </template>
 
 <script>
 import TheNavbar from "@/components/UI/TheNavbar";
+import TheFooter from "@/components/UI/TheFooter";
 // import Loader from "@/components/Loader";
 
 export default {
   name: 'App',
   components: {
     TheNavbar,
-
+    TheFooter
     // Loader
   }
 }

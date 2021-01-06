@@ -1,10 +1,16 @@
 <template>
-<div><h2>test</h2></div>
+<div>
+
+</div>
 </template>
 
 <script>
+
 export default {
-name: "Future"
+name: "Future",
+  components: {
+
+  }
 }
 </script>
 

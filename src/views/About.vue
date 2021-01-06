@@ -1,5 +1,19 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div>
+  <PastMainPicture></PastMainPicture>
+    <PastAboutMe></PastAboutMe>
   </div>
 </template>
+<script>
+import PastMainPicture from "@/components/PastMainPicture";
+import PastAboutMe from "@/components/PastAboutMe";
+export default {
+  components:{
+    PastMainPicture,
+    PastAboutMe
+  }
+}
+</script>
+<style scoped>
+
+</style>
