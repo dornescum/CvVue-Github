@@ -1,49 +1,48 @@
 <template>
-
-    <section id="container-repo">
+  <div>
+    <section >
       <div class="title">
         <!--    titlu-->
         <h2>Some Projects</h2>
         <div class="underline"></div>
-
         <!--    despre-->
-        <article class="projects">
+        <article class="projects"  v-for="project in projects" :key="project.id" :class="{active: project.isActive}">
           <div class="img-container">
-            <img :src="pushProject().img" id="person-img" alt="">
+            <img :src=project.img id="person-img" alt="">
           </div>
-          <h4 id="author">{{pushProject().name}}</h4>
-          <p id="source">{{pushProject().source}}</p>
-          <p id="info">{{pushProject().text}}</p>
+          <h4>{{ project.name }}</h4>
+          <p>{{ project.source }}</p>
+          <p>{{ project.text }}</p>
           <!--        prev next btn-->
-          <div class="button-container">
-            <button class="prev-btn" @click="pushProject">
-              <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="next-btn" @click="pushProject">
-              <i class="fas fa-chevron-right"></i>
-            </button>
-          </div>
         </article>
+        <div class="button-container">
+          <button class="prev-btn"  @click="moveLeft">
+            <i class="fas fa-chevron-left"> Prev </i>
+          </button> |
+          <button class="next-btn" @click="moveRight">
+          <b>Next </b>    <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
       </div>
     </section>
-
+  </div>
 </template>
 
 <script>
-
 export default {
-  name: "HomeProjects",
-  components: {},
+  name: "HomeVFor",
   data() {
     return {
+      isActive: true,
       buttonRight: true,
       buttonLeft: true,
       article: [],
       projects: [
         {
           id: 1,
-          name: "Mihai Dornescu",
+          name: "1 Mihai Dornescu",
           source: "Udemy",
+          isActive: true,
           img: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80',
           text: '            1Lorem ipsum dolor sit ame' +
               't, consectetur adipisicing elit. Accusantium, adip' +
@@ -53,8 +52,9 @@ export default {
         },
         {
           id: 2,
-          name: "Mihai Dornescu",
+          name: "2 Mihai Dornescu",
           source: "Youtube",
+          isActive: false,
           img: 'https://images.unsplash.com/photo-1587620962725-abab7fe55159?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80',
           text: '   “2Lorem ipsum” dummy text is used by many web-developers to test ' +
               'how their HTML templates will look with real data. Often, developers use ' +
@@ -63,8 +63,9 @@ export default {
         },
         {
           id: 3,
-          name: "Mihai Dornescu",
+          name: "3 Mihai Dornescu",
           source: "GitHub",
+          isActive: false,
           img: 'https://images.unsplash.com/photo-1593720217529-01f0a5d09aed?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1008&q=80',
           text: '           3Lorem ipsum dolor sit amet, consectetur adipisicing elit. ' +
               'Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo' +
@@ -73,8 +74,9 @@ export default {
         },
         {
           id: 4,
-          name: "Mihai Dornescu",
+          name: "4 Mihai Dornescu",
           source: "Udemy",
+          isActive: false,
           img: 'https://images.unsplash.com/photo-1593720213428-28a5b9e94613?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80',
           text: ' 4 Lorem Ipsum is simply dummy text of the printing and typesetting industry. ' +
               'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, ' +
@@ -88,46 +90,49 @@ export default {
     }
   },
   methods: {
-    pushProject() {
-      let randomProject = Math.random(this.projects);
-      console.log(randomProject)
-      if (randomProject < 0.5) {
-        return this.projects[0]
-      }
-      if(randomProject > 0.3){
-        return this.projects[2]
-      }
-      if(randomProject > 0.5){
-        return this.projects[1]
-      }
-      if(randomProject > 0.7){
-        return this.projects[3]
-      }
-      setTimeout(function (){
-         randomProject =this.projects.filter((item)=> {
-           return item
-         })
-      },1000)
 
+    moveLeft(){
+      this.projects.filter((item)=>{
+        if(item.isActive){
+          console.log(item.id)
+          // let currentId = item.id
+          this.prevItem = item.id - 1
+          item.isActive = false
+          if(this.prevItem < this.projects.length -Math.random(this.projects.length)*10){
+            this.prevItem = this.projects.length - 1
+            console.log(this.prevItem)
+          }
+        }
+      })
+      this.projects.filter((item)=>{
+        if(item.id === this.prevItem){
+          item.isActive = true
+        }
+      })
 
-
-    //   let randomProject= this.projects.map((item)=> {
-    //     return ` <div class="img-container">
-    //         <img src="item.img" id="person-img" alt="">
-    //       </div>
-    //       <h4 id="author">${{item}}</h4>
-    //       <p id="source">{{pushProject().source}}</p>
-    //       <p id="info">{{pushProject().text}}</p>
-    //      `
-    //   })
-    //   console.log(randomProject)
-    //
-    //   this.article.push(randomProject)
-    //   return randomProject
+      // proiecte =proiecte - 1
+    },
+    moveRight(){
+      this.projects.filter((item)=>{
+        if(item.isActive){
+          console.log(item.id)
+          // let currentId = item.id
+          this.nextItem = item.id + 1
+          item.isActive = false
+          if(this.nextItem > this.projects.length){
+            this.nextItem = 1
+          }
+        }
+      })
+      this.projects.filter((item)=>{
+        if(item.id === this.nextItem){
+          item.isActive = true
+        }
+      })
     }
-  }
-}
+  },
 
+}
 </script>
 
 <style scoped>
@@ -137,7 +142,9 @@ export default {
   /*justify-content: center;*/
   /*max-width: var(--fixed-width);*/
 }
-
+.active {
+  display: block !important;
+}
 .projects {
   background: var(--clr-white);
   padding: 1.5rem 2rem;
@@ -148,6 +155,8 @@ export default {
   -o-transition: var(--transition);
   transition: var(--transition);
   text-align: center;
+  display: none;
+  height: 600px;
 }
 
 .projects:hover {

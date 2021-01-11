@@ -3,7 +3,8 @@
     <MainPicture />
     <HomeSkills></HomeSkills>
     <HomeAboutMe></HomeAboutMe>
-    <HomeProjects></HomeProjects>
+<!--    <HomeProjects></HomeProjects>-->
+    <HomeVFor></HomeVFor>
   </div>
 </template>
 
@@ -12,7 +13,8 @@
 import MainPicture from '@/components/MainPicture.vue'
 import HomeSkills from "@/components/HomeSkills";
 import HomeAboutMe from "@/components/HomeAboutMe";
-import HomeProjects from "@/components/HomeProjects";
+// import HomeProjects from "@/components/HomeProjects";
+import HomeVFor from "@/components/HomeVFor";
 
 export default {
   name: 'Home',
@@ -20,7 +22,8 @@ export default {
     MainPicture,
     HomeSkills,
     HomeAboutMe,
-    HomeProjects
+    // HomeProjects,
+    HomeVFor
   }
 }
 </script>
