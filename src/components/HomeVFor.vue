@@ -16,12 +16,15 @@
           <!--        prev next btn-->
         </article>
         <div class="button-container">
-          <button class="prev-btn"  @click="moveLeft">
-            <i class="fas fa-chevron-left"> Prev </i>
-          </button> |
-          <button class="next-btn" @click="moveRight">
-          <b>Next </b>    <i class="fas fa-chevron-right"></i>
-          </button>
+          <button type="button" class="btn btn-elegant" @click="moveLeft">Elegant <i class="fas fa-chevron-left"></i></button>
+
+<!--          <button class="prev-btn"  @click="moveLeft">-->
+<!--            <i class="fas fa-chevron-left"> Prev </i>-->
+<!--          </button> |-->
+<!--          <button class="next-btn" @click="moveRight">-->
+<!--          <b>Next </b>    <i class="fas fa-chevron-right"></i>-->
+<!--          </button>-->
+          <button type="button" class="btn btn-elegant" @click="moveRight">Elegant <i class="fas fa-chevron-right"></i></button>
         </div>
       </div>
     </section>
